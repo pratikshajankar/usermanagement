@@ -4,6 +4,8 @@ import { SortableColumn, SortIcon, TableModule } from 'primeng/table';
 import { AppComponent } from './app.component';
 import { UserComponent } from './Pages/user/user.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -13,8 +15,8 @@ import { PaginatorModule } from 'primeng/paginator';
   imports: [
     TableModule,
     PaginatorModule,
-    SortableColumn,
-    SortIcon,
+    ReactiveFormsModule,
+    CommonModule,
     BrowserModule
   ],
   providers: [],

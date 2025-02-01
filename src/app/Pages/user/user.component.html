@@ -1,8 +1,8 @@
     <div class="row">
         <div class="col-6">
-            <p-table [value]="UserList" [paginator]="true" [row]="10" [showCurrentPageReport]="true" 
+            <p-table [value]="UserList" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
             [tableStyle]="{ 'min-width': '50rem' }" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [rowPerPageOptions]="[10,20,30]" [sortMode]='multiple'>
+            [rowsPerPageOptions]="[10,20,30]" [sortMode]="'multiple'">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>SrNo</th>
@@ -13,6 +13,7 @@
                             <p-sortIcon field="email"></p-sortIcon>
                         </th>
                         <th>Role</th>
+                        <th>Action</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-user let-srno="rowIndex">
@@ -21,12 +22,37 @@
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.role }}</td>
+                        <td>
+                            <button (onclick)="onEdit(user)">Edit</button>
+                            <button (onclick)="onDelete(user.userid)">Delete</button>
+                        </td>
                     </tr>
                 </ng-template>
             </p-table>
         </div>
         <div class="col-6">
-            
+            <form [formGroup]="userForm">
+                <label>User Name:</label>
+                <input type="text" formControlName="name" placeholder="Enter User Name">
+                <label>User Email</label>
+                <input type="email" formControlName="email" placeholder="Enter EmailId"> 
+                <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+                    Please Enter Valid EmailId.
+                </div>  
+                <label for="">Role</label>
+                <input type="text" formControlName="role" placeholder="Enter User Role"> 
+                <div class="row">
+                    <div class="col-4">
+                        <button (onclick)="onSave()">Save</button>
+                    </div>
+                    <div class="col-4">
+                        <button (onclick)="onUpdate()">Update</button>
+                    </div>
+                    <div class="col-4">
+                        <button (onclick)="onReset()">Reset</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
